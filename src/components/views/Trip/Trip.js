@@ -4,6 +4,7 @@ import HTMLParser from 'react-html-parser';
 
 import NotFound from '../NotFound/NotFound';
 import Section from '../../layout/Section/Section';
+import OrderForm from '../../features/OrderForm/OrderFormContainer';
 import PageTitle from '../../common/PageTitle/PageTitle';
 import SideImage from '../../common/SideImage/SideImage';
 import DetailsBox from '../../common/DetailsBox/DetailsBox';
@@ -39,6 +40,14 @@ const Trip = ({error, name, image, cost, days, description, country, intro}) => 
           </Row>
         </Grid>
       </DetailsBox>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <PageTitle text='Trip options' />
+            <OrderForm tripCost={cost} />
+          </Col>
+        </Row>
+      </Grid>
       <Grid>
         <Row>
           <Col xs={12}>
