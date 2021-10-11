@@ -15,7 +15,7 @@ class OrderOptionNumber extends React.Component {
     return (
       <div className={styles.number}>
         <input
-          type="number"
+          type= 'number'
           className={styles.inputSmall}
           value={currentValue}
           min={limits}
