@@ -10,13 +10,21 @@ export const getFilteredTrips = ({trips, filters}) => {
     const pattern = new RegExp(filters.searchPhrase, 'i');
     output = output.filter(trip => pattern.test(trip.name));
   }
-
-  // TODO - filter by duration
-
-  // TODO - filter by tags
-
-  // TODO - sort by cost descending (most expensive goes first)
-
+  //  filter by duration
+  if (filters.duration) {
+    output = output.filter(trip =>
+    {
+      console.log(trip);
+      console.log(trip.days <= filters.duration.to && trip.days >= filters.duration.from, filters.duration.from, filters.duration.to, trip.days );
+      return trip.days <= filters.duration.to && trip.days >= filters.duration.from;
+    }
+    );
+  }
+    // filter by tags
+  // if(filters.tag){
+  //   output = output.filter(tag => pattern.test(tag.name));
+  //   // sort by cost descending (most expensive goes first)
+  // }
   return output;
 };
 

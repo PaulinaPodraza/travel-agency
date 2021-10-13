@@ -23,6 +23,7 @@ export const removeTag = payload => ({ payload, type: REMOVE_TAG });
 
 // reducer
 export default function reducer(statePart = [], action = {}) {
+  console.log(action);
   switch (action.type) {
     case CHANGE_PHRASE:
       return {
@@ -33,7 +34,7 @@ export default function reducer(statePart = [], action = {}) {
     case CHANGE_DURATION:
       return {
         ...statePart,
-        duration: action.payload,
+        duration: {...statePart.duration, to: action.payload},
       };
     case ADD_TAG:
       return {
