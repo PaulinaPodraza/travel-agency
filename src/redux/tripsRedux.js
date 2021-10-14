@@ -21,10 +21,12 @@ export const getFilteredTrips = ({trips, filters}) => {
     );
   }
     // filter by tags
-  // if(filters.tag){
-  //   output = output.filter(tag => pattern.test(tag.name));
-  //   // sort by cost descending (most expensive goes first)
-  // }
+  if (filters.tags.length) {
+    output = output.filter((trip) =>
+      filters.tags.every((item) => trip.tags.includes(item))
+    );
+  }
+  // sort by cost descending (most expensive goes first)
   return output;
 };
 
