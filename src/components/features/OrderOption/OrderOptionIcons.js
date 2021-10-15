@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from 'react';
 import styles from './OrderOption.module.scss';
 import PropTypes from 'prop-types';
@@ -13,24 +14,24 @@ class OrderOptionIcon extends React.Component {
   }
   render() {
     const { values, required, currentValue, setOptionValue } = this.props;
-      return (
-        <div>
-          {required && (
-            <div className={styles.icon} value='' onClick={() => setOptionValue('')}>
-              <Icon name="times-circle"></Icon>None
-            </div>
-          )}
-          {values.map(value => (
-            <div className={currentValue === value.id ? `${styles.iconActive} ${styles.icon}` : styles.icon}
-              onClick={() => setOptionValue(value.id)}>
-              <div key={value.id} value={value.id}>
-                <Icon name={value.icon}></Icon>
-                {value.name} ({formatPrice(value.price)})
-              </div>
+    return (
+      <div>
+        {required && (
+          <div className={styles.icon} value='' onClick={() => setOptionValue('')}>
+            <Icon name="times-circle"></Icon>None
           </div>
-          ))}
-        </div>
-      );
+        )}
+        {values.map(value => (
+          <div className={currentValue === value.id ? `${styles.iconActive} ${styles.icon}` : styles.icon}
+            onClick={() => setOptionValue(value.id)}>
+            <div key={value.id} value={value.id}>
+              <Icon name={value.icon}></Icon>
+              {value.name} ({formatPrice(value.price)})
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 

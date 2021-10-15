@@ -34,17 +34,17 @@ export default function reducer(statePart = [], action = {}) {
     case CHANGE_DURATION:
       return {
         ...statePart,
-        duration: {...statePart.duration, to: action.payload},
+        duration: {...statePart.duration, [action.payload.type]: action.payload.value },
       };
     case ADD_TAG:
       return {
         ...statePart,
-        tags: action.payload,
+        tags: [...statePart.tags, action.payload],
       };
     case REMOVE_TAG:
       return {
         ...statePart,
-        duration: []
+        tags: statePart.tags.filter(tag => tag !== action.payload),
       };
     default:
       return statePart;

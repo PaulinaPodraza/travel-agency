@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React from 'react';
 import styles from './OrderOption.module.scss';
 import PropTypes from 'prop-types';
@@ -11,15 +12,15 @@ class OrderOptionDate extends React.Component {
   }
   render() {
     const { currentValue, setOptionValue } = this.props;
-      return (
-        <div className={styles.component}>
-          <DatePicker
-            value={currentValue}
-            selected={currentValue}
-            onChange={(date) => { setOptionValue(date) }}
-          />
-        </div>
-      );
+    return (
+      <div className={styles.component}>
+        <DatePicker
+          value={currentValue}
+          selected={currentValue}
+          onChange={(date) => { setOptionValue(date);}}
+        />
+      </div>
+    );
   }
 }
 

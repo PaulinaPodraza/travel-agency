@@ -20,7 +20,7 @@ export const getFilteredTrips = ({trips, filters}) => {
     }
     );
   }
-    // filter by tags
+  // filter by tags
   if (filters.tags.length) {
     output = output.filter((trip) =>
       filters.tags.every((item) => trip.tags.includes(item))

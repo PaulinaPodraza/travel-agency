@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import styles from './OrderOption.module.scss';
 import { formatPrice } from '../../../utils/formatPrice';
 

@@ -24,7 +24,7 @@ class OrderOptionCheckboxes extends React.Component {
     return (
       <div className={styles.checkboxes}>
         {values.map(value => (
-        <label key={value.id}>
+          <label key={value.id}>
             <input
               type='checkbox' value={value.id}
               checked={currentValue.includes(value.id)}

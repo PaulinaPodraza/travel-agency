@@ -9,15 +9,15 @@ class OrderOptionText extends React.Component {
   }
   render() {
     const { currentValue, setOptionValue } = this.props;
-      return (
-        <div className={styles.component}>
-          <input
-            type='text'
-            value={currentValue}
-            onChange={event => setOptionValue(event.currentTarget.value)}
-          />
-        </div>
-      );
+    return (
+      <div className={styles.component}>
+        <input
+          type='text'
+          value={currentValue}
+          onChange={event => setOptionValue(event.currentTarget.value)}
+        />
+      </div>
+    );
   }
 }
 

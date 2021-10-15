@@ -29,7 +29,7 @@ const Trips = ({trips}) => (
 );
 
 Trips.propTypes = {
-  trips: PropTypes.arrayOf(PropTypes.object),
+  trips: PropTypes.arrayOf([PropTypes.object]),
 };
 
 export default Trips;

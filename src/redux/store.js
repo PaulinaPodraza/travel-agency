@@ -21,9 +21,9 @@ const initialState = {
     },
   },
   order: {
-  trip: null,
-  email: '',
-  options: {},
+    trip: null,
+    email: '',
+    options: {},
   },
 };
 
