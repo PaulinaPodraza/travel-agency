@@ -31,4 +31,19 @@ describe('Component TripSummary', () => {
     expect(component.find('.details span').last().text()).toEqual('from $123');
     expect(component.find('.details span').first().text()).toEqual('5 days');
   });
+
+  it('should render tags', () => {
+    const boardTags = ['tag1', 'tag2', 'tag3'];
+    const component = shallow(<TripSummary id={'abc'} image={'image.jpg'} name={'ABC'} cost={'$123'} days={5} tags={boardTags}/>);
+    expect(component.find('.tags .tag').at(0).text()).toEqual(boardTags[0]);
+    expect(component.find('.tags .tag').at(1).text()).toEqual(boardTags[1]);
+    expect(component.find('.tags .tag').at(2).text()).toEqual(boardTags[2]);
+  });
+
+  it('shouldnt render tags when table tags is empty or undefined', () => {
+    const componentA = shallow(<TripSummary id={'abc'} image={'image.jpg'} name={'ABC'} cost={'$123'} days={5} />);
+    expect(componentA.find('.tags .tag').exists()).toEqual(false);
+    const componentB = shallow(<TripSummary id={'abc'} image={'image.jpg'} name={'ABC'} cost={'$123'} days={5} tags={[]}/>);
+    expect(componentB.find('.tags .tag').exists()).toEqual(false);
+  });
 });
