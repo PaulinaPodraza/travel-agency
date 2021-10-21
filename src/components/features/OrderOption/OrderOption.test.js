@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {shallow} from 'enzyme';
 import OrderOption from './OrderOption';
@@ -11,14 +12,13 @@ describe('Component OrderOption', () => {
   });
 
   it('should return empty object if called without required props', () => {
-    const component = shallow(<OrderOption />);
+    const component = shallow(<OrderOption type={type} name={name}/>);
     expect(component).toEqual({});
   });
 
   it('should render props name', () => {
-    const name = 'Alicja';
-    const component = shallow(<OrderOption name={'Alicja'} />);
-    expect(component.find('.title').prop(name)).toEqual('Alicja');
+    const component = shallow(<OrderOption type={type} name={name} />);
+    expect(component.find('.title').text()).toEqual('Alicja');
   });
 });
 
@@ -84,6 +84,10 @@ for(let type in optionTypes){
     it('passes dummy test', () => {
       expect(1).toBe(1);
     });
+    it(`renders ${optionTypes[type]}`, () => {
+      expect(subcomponent).toBeTruthy();
+      expect(subcomponent.length).toBe(1);
+    });
 
     /* type-specific tests */
     switch (type) {
@@ -108,21 +112,25 @@ for(let type in optionTypes){
         });
         break;
       }
-      case 'icons': {
-        break;
-      }
-      case 'checkboxes': {
-        break;
-      }
-      case 'number': {
-        break;
-      }
-      case 'text': {
-        break;
-      }
-      case 'date': {
-        break;
-      }
+      // case 'icons': {
+      //   it('should render div with class .icon', () => {
+      //     const icon = renderedSubcomponent.find('div .icon');
+      //     expect(icon.length).toBe(2);
+      //   });
+      //   break;
+      // }
+      // case 'checkboxes': {
+      //   break;
+      // }
+      // case 'number': {
+      //   break;
+      // }
+      // case 'text': {
+      //   break;
+      // }
+      // case 'date': {
+      //   break;
+      // }
     }
   });
 }
