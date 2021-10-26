@@ -2,6 +2,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OrderOption from './OrderOption';
+import DatePicker from 'react-datepicker';
 
 describe('Component OrderOption', () => {
   const type = 'number';
@@ -68,11 +69,11 @@ for(let type in optionTypes){
     let mockSetOrderOption; /* 1 */
 
     beforeEach(() => {
-      mockSetOrderOption = jest.fn(); /* 2 */
+      mockSetOrderOption = jest.fn();
       component = shallow(
         <OrderOption
           type={type}
-          setOrderOption={mockSetOrderOption} /* 3 */
+          setOrderOption={mockSetOrderOption}
           {...mockProps}
           {...mockPropsForType[type]}
         />
@@ -80,9 +81,10 @@ for(let type in optionTypes){
       subcomponent = component.find(optionTypes[type]);
       renderedSubcomponent = subcomponent.dive();
     });
+
     /* common tests */
     it('passes dummy test', () => {
-      expect(1).toBe(1);
+      //console.log(subcomponent.debug());
     });
     it(`renders ${optionTypes[type]}`, () => {
       expect(subcomponent).toBeTruthy();
@@ -105,6 +107,7 @@ for(let type in optionTypes){
           expect(options.at(0).prop('value')).toBe(mockProps.values[0].id);
           expect(options.at(1).prop('value')).toBe(mockProps.values[1].id);
         });
+
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('select').simulate('change', {currentTarget: {value: testValue}});
           expect(mockSetOrderOption).toBeCalledTimes(1);
@@ -112,25 +115,112 @@ for(let type in optionTypes){
         });
         break;
       }
-      // case 'icons': {
-      //   it('should render div with class .icon', () => {
-      //     const icon = renderedSubcomponent.find('div .icon');
-      //     expect(icon.length).toBe(2);
-      //   });
-      //   break;
-      // }
-      // case 'checkboxes': {
-      //   break;
-      // }
-      // case 'number': {
-      //   break;
-      // }
-      // case 'text': {
-      //   break;
-      // }
-      // case 'date': {
-      //   break;
-      // }
+      case 'icons': {
+        it('contains div with class icon and iconActive', () => {
+          const iconActive = renderedSubcomponent.find('.iconActive');
+          expect(iconActive.length).toBe(1);
+
+          const icons = renderedSubcomponent.find('.icon');
+          expect(icons.length).toBe(mockProps.values.length -1);
+
+          expect(iconActive.text()).toMatch(new RegExp(mockProps.values[0].name));
+        });
+        it('should run setOrderOption function on click', () => {
+          renderedSubcomponent.find('.icon').simulate('click');
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+        });
+        break;
+      }
+      case 'checkboxes': {
+        it('contains input with correct props', () => {
+          const element = renderedSubcomponent.find('.checkboxes');
+
+          expect(element.find('input').at(0).prop('value')).toBe(
+            mockProps.values[0].id
+          );
+          expect(element.find('input').at(0).prop('checked')).toBe(
+            mockProps.currentValue.includes(mockProps.values[0].id)
+          );
+          expect(element.find('input').at(1).prop('value')).toBe(
+            mockProps.values[1].id
+          );
+          expect(element.find('input').at(1).prop('checked')).toBe(
+            mockProps.currentValue.includes(mockProps.values[1].id)
+          );
+        });
+
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent
+            .find(`input[value="${testValue}"]`)
+            .simulate('change', { currentTarget: { checked: true } });
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: [mockProps.currentValue, testValue],
+          });
+        });
+        break;
+      }
+      case 'number': {
+        it('contains input with correct props', () => {
+          const input = renderedSubcomponent.find('input');
+          expect(input.length).toBe(1);
+
+          expect(input.prop('value')).toBe(
+            mockPropsForType.number.currentValue
+          );
+          expect(input.prop('min')).toBe(mockProps.limits.min);
+          expect(input.prop('max')).toBe(mockProps.limits.max);
+          expect(input.hasClass('inputSmall')).toBe(true);
+        });
+
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent
+            .find('input')
+            .simulate('change', { currentTarget: { value: testValueNumber } });
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValueNumber,
+          });
+        });
+
+        break;
+      }
+      case 'text': {
+        it('contains input with correct props', () => {
+          const input = renderedSubcomponent.find('input');
+          expect(input.length).toBe(1);
+          expect(input.hasClass('input')).toBe(true);
+        });
+
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent
+            .find('input')
+            .simulate('change', { currentTarget: { value: testValue } });
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValue,
+          });
+        });
+
+        break;
+      }
+      case 'date': {
+        it('contains component DataPicker', () => {
+          const element = renderedSubcomponent.find(DatePicker);
+          expect(element.length).toBe(1);
+        });
+
+        it('should run setOrderOption function on change', () => {
+          const element = renderedSubcomponent.find(DatePicker);
+          element.simulate('change', testValue);
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({
+            [mockProps.id]: testValue,
+          });
+        });
+        break;
+      }
     }
   });
 }

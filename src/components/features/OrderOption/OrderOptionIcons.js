@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { formatPrice } from '../../../utils/formatPrice';
 import Icon from '../../common/Icon/Icon';
 
-class OrderOptionIcon extends React.Component {
+class OrderOptionIcons extends React.Component {
   static propTypes = {
-    values: PropTypes.object,
+    values: PropTypes.array,
     required: PropTypes.node,
     currentValue: PropTypes.node,
     setOptionValue: PropTypes.func,
@@ -35,4 +35,4 @@ class OrderOptionIcon extends React.Component {
   }
 }
 
-export default OrderOptionIcon;
+export default OrderOptionIcons;

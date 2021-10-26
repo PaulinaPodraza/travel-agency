@@ -15,9 +15,10 @@ const newValueSet = (currentValue, id, checked) => {
 };
 class OrderOptionCheckboxes extends React.Component {
   static propTypes = {
-    values: PropTypes.object,
+    values: PropTypes.array,
     currentValue: PropTypes.node,
     setOptionValue: PropTypes.func,
+    checked: PropTypes.bool,
   }
   render() {
     const { values, currentValue, setOptionValue } = this.props;

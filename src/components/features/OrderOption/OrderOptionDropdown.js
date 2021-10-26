@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
 import styles from './OrderOption.module.scss';
 import { formatPrice } from '../../../utils/formatPrice';
-
+import PropTypes from 'prop-types';
 
 const OrderOptionDropdown = ({ values, required, currentValue, setOptionValue }) => (
   <select
@@ -18,5 +17,13 @@ const OrderOptionDropdown = ({ values, required, currentValue, setOptionValue })
     ))}
   </select>
 );
+
+OrderOptionDropdown.propTypes = {
+  name: PropTypes.string,
+  values: PropTypes.array,
+  required: PropTypes.bool,
+  currentValue: PropTypes.string,
+  setOptionValue: PropTypes.func,
+};
 
 export default OrderOptionDropdown;
