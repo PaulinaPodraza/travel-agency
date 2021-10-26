@@ -15,7 +15,7 @@ function renderTags(tags) {
         ))}
       </div>
     );
-  };
+  }
 }
 
 const TripSummary = ({ id, image, name, cost, days, tags }) => (
