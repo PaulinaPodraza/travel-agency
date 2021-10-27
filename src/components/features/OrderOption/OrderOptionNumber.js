@@ -18,8 +18,8 @@ class OrderOptionNumber extends React.Component {
           type= 'number'
           className={styles.inputSmall}
           value={currentValue}
-          min={limits}
-          max={limits}
+          min={limits.min}
+          max={limits.max}
           onChange={event => setOptionValue(event.currentTarget.value)}>
         </input>
       </div>

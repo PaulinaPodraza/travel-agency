@@ -5,7 +5,6 @@ import Hero from './Hero';
 describe('Component Hero', () => {
   it('should render without crashing', () => {
     const component = shallow(<Hero titleText='Lorem ipsum' imageSrc="hero-image" />);
-    console.log(component.debug());
     expect(component).toBeTruthy();
   });
 

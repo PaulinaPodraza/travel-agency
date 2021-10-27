@@ -84,7 +84,7 @@ for(let type in optionTypes){
 
     /* common tests */
     it('passes dummy test', () => {
-      //console.log(subcomponent.debug());
+      expect(1).toBe(1);
     });
     it(`renders ${optionTypes[type]}`, () => {
       expect(subcomponent).toBeTruthy();
@@ -121,12 +121,12 @@ for(let type in optionTypes){
           expect(iconActive.length).toBe(1);
 
           const icons = renderedSubcomponent.find('.icon');
-          expect(icons.length).toBe(mockProps.values.length -1);
+          expect(icons.length).toBe(mockProps.values.length);
 
           expect(iconActive.text()).toMatch(new RegExp(mockProps.values[0].name));
         });
         it('should run setOrderOption function on click', () => {
-          renderedSubcomponent.find('.icon').simulate('click');
+          renderedSubcomponent.find('.icon').last().simulate('click');
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
         });
@@ -188,9 +188,9 @@ for(let type in optionTypes){
       }
       case 'text': {
         it('contains input with correct props', () => {
-          const input = renderedSubcomponent.find('input');
+          const input = renderedSubcomponent.find('input[type="text"]');
           expect(input.length).toBe(1);
-          expect(input.hasClass('input')).toBe(true);
+          expect(input.prop('type')).toBe('text');
         });
 
         it('should run setOrderOption function on change', () => {

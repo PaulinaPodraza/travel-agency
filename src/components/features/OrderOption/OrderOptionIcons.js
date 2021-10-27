@@ -22,7 +22,7 @@ class OrderOptionIcons extends React.Component {
           </div>
         )}
         {values.map(value => (
-          <div className={currentValue === value.id ? `${styles.iconActive} ${styles.icon}` : styles.icon}
+          <div key={value.id} className={currentValue === value.id ? `${styles.iconActive} ${styles.icon}` : styles.icon}
             onClick={() => setOptionValue(value.id)}>
             <div key={value.id} value={value.id}>
               <Icon name={value.icon}></Icon>
