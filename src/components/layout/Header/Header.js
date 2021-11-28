@@ -3,7 +3,6 @@ import {NavLink, Link} from 'react-router-dom';
 import styles from './Header.module.scss';
 import Icon from '../../common/Icon/Icon';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
 class Header extends React.Component {
   render(){
     return (
